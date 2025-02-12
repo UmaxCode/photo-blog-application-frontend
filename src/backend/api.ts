@@ -4,7 +4,7 @@ const APP_BASE_URL = import.meta.env.VITE_api_gateway_endpoint;
 
 export const api = axios.create({
   baseURL: APP_BASE_URL,
-  timeout: 10000, // Timeout in ms
+  timeout: 30000, // Timeout in ms
 });
 
 api.interceptors.request.use(
