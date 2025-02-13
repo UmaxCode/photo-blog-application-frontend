@@ -2,6 +2,8 @@
 const AUTH_BASE_URL = import.meta.env.VITE_auth_endpoint;
 const clientId = import.meta.env.VITE_client_id;
 const callbackUrl = import.meta.env.VITE_callback_endpoint;
+const APP_BASE_URL = import.meta.env.VITE_api_gateway_endpoint;
+const WEBSOCKET_BASE_URL = import.meta.env.VITE_websocket_endpoint;
 
 // Exported endpoints
 export const Endpoints = {
@@ -10,4 +12,6 @@ export const Endpoints = {
     TOKEN: `${AUTH_BASE_URL}/oauth2/token`,
     CALLBACK: callbackUrl,
   },
+  PHOTOS: `${APP_BASE_URL}/photos`,
+  WSS: WEBSOCKET_BASE_URL,
 };
