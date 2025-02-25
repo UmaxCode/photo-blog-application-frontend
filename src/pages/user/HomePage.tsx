@@ -148,9 +148,9 @@ const HomePage = () => {
       if (fileInputRef.current) {
         fileInputRef.current.value = "";
       }
-    } catch (error) {
-      console.error("Upload error:", error);
-      toast.error("Upload failed", {
+    } catch (error: any) {
+      const errorMessage = error.response.data.message;
+      toast.error(errorMessage, {
         position: "top-right",
       });
     } finally {
