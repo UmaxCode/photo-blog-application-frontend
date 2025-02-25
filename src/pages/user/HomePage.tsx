@@ -23,6 +23,7 @@ import {
 import { Textarea } from "../../components/ui/textarea";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { X } from "lucide-react";
+import { toast } from "sonner";
 
 type PhotoType = {
   imgId: string;
@@ -54,6 +55,9 @@ const HomePage = () => {
     socket.onmessage = (event) => {
       console.log("Message received:", event.data);
       fetchPhotos();
+      toast.success("Image processed successfully", {
+        position: "top-right",
+      });
     };
     socket.onerror = (error) => {
       console.error("WebSocket Error:", error);
@@ -136,14 +140,19 @@ const HomePage = () => {
           }
         },
       });
-
+      const message = response.data.message;
+      toast.success(message, {
+        position: "top-right",
+      });
       setPic(null);
       if (fileInputRef.current) {
         fileInputRef.current.value = "";
       }
     } catch (error) {
       console.error("Upload error:", error);
-      alert("Upload failed!");
+      toast.error("Upload failed", {
+        position: "top-right",
+      });
     } finally {
       setUploading(false);
     }
@@ -274,7 +283,7 @@ const HomePage = () => {
             <DialogTitle>Copy and send pre-signed url</DialogTitle>
             <DialogDescription>This url expires in 3 hours</DialogDescription>
 
-            <Textarea value={preSignedUrl} ref={textAreaRef} />
+            <Textarea value={preSignedUrl} ref={textAreaRef} readOnly />
             <Button
               className="mt-2 bg-orange-600/90 hover:bg-orange-600"
               onClick={() => handleCopy()}
