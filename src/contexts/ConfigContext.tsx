@@ -2,10 +2,10 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { SSMClient, GetParameterCommand } from "@aws-sdk/client-ssm";
 
 const client = new SSMClient({
-  region: import.meta.env.VITE_aws_region,
+  region: import.meta.env.VITE_region,
   credentials: {
-    accessKeyId: import.meta.env.VITE_aws_secret_id,
-    secretAccessKey: import.meta.env.VITE_aws_secret_key,
+    accessKeyId: import.meta.env.VITE_secret_id,
+    secretAccessKey: import.meta.env.VITE_secret_key,
   },
 });
 
