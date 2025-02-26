@@ -4,12 +4,15 @@ import "./index.css";
 import App from "./App.tsx";
 import { AuthProvider } from "./contexts/AuthContext.tsx";
 import { Toaster } from "./components/ui/sonner.tsx";
+import { ConfigProvider } from "./contexts/ConfigContext.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <AuthProvider>
-      <App />
-      <Toaster />
-    </AuthProvider>
+    <ConfigProvider>
+      <AuthProvider>
+        <App />
+        <Toaster />
+      </AuthProvider>
+    </ConfigProvider>
   </StrictMode>
 );
