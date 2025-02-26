@@ -1,8 +1,9 @@
 import { api } from "../backend/api";
-import { useEndpoints } from "../hooks/use-endpoints";
+
+const APP_BASE_URL = import.meta.env.VITE_api_gateway_endpoint;
+const PHOTOS = `${APP_BASE_URL}/photos`;
 
 export const fetchUsersPost = async () => {
-  const { PHOTOS } = useEndpoints();
   try {
     const response = await api.get(`${PHOTOS}/own-photo`);
     return response.data;
@@ -13,7 +14,6 @@ export const fetchUsersPost = async () => {
 };
 
 export const fetchOthersPost = async () => {
-  const { PHOTOS } = useEndpoints();
   try {
     const response = await api.get(`${PHOTOS}/others-photo`);
     return response.data;
@@ -24,7 +24,6 @@ export const fetchOthersPost = async () => {
 };
 
 export const movePostToRecyclingBin = async (id: string) => {
-  const { PHOTOS } = useEndpoints();
   try {
     const response = await api.patch(`${PHOTOS}/${id}/recycle-bin`);
     return response.data;
@@ -35,7 +34,6 @@ export const movePostToRecyclingBin = async (id: string) => {
 };
 
 export const sharePost = async (id: string) => {
-  const { PHOTOS } = useEndpoints();
   try {
     const response = await api.get(`${PHOTOS}/${id}/generate-pre-signed-url`);
     return response.data;
@@ -46,7 +44,6 @@ export const sharePost = async (id: string) => {
 };
 
 export const fetchUserRecycledPost = async () => {
-  const { PHOTOS } = useEndpoints();
   try {
     const response = await api.get(`${PHOTOS}/recycle-bin`);
     return response.data;
@@ -57,7 +54,6 @@ export const fetchUserRecycledPost = async () => {
 };
 
 export const restorePostFromRecyclingBin = async (id: string) => {
-  const { PHOTOS } = useEndpoints();
   try {
     const response = await api.patch(`${PHOTOS}/${id}/recycle-bin/restore`);
     return response.data;
@@ -68,7 +64,6 @@ export const restorePostFromRecyclingBin = async (id: string) => {
 };
 
 export const permanentlyDeletePost = async (id: string) => {
-  const { PHOTOS } = useEndpoints();
   try {
     const response = await api.delete(`${PHOTOS}/${id}`);
     return response.data;

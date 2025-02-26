@@ -23,12 +23,15 @@ import { Textarea } from "../../components/ui/textarea";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { X } from "lucide-react";
 import { toast } from "sonner";
-import { useEndpoints } from "../../hooks/use-endpoints";
+import { useConfig } from "../../contexts/ConfigContext";
+// import { useEndpoints } from "../../hooks/use-endpoints";
 
 type PhotoType = {
   imgId: string;
   image: string;
 };
+
+const APP_BASE_URL = import.meta.env.VITE_api_gateway_endpoint;
 
 const HomePage = () => {
   const { firstName, lastName, email } = useAuth();
@@ -44,10 +47,11 @@ const HomePage = () => {
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
   const [preSignedUrl, setPreSignedUrl] = useState<string>("");
-  const { WSS, PHOTOS } = useEndpoints();
+  const { websocket } = useConfig();
+  // const { WSS, PHOTOS } = useEndpoints();
 
   useEffect(() => {
-    const socket = new WebSocket(`${WSS}?email=${email}`);
+    const socket = new WebSocket(`${websocket}?email=${email}`);
 
     socket.onopen = () => {
       console.log("WebSocket connection opened");
@@ -131,7 +135,7 @@ const HomePage = () => {
 
     try {
       setUploading(true);
-      const response = await api.post(`${PHOTOS}`, formData, {
+      const response = await api.post(`${APP_BASE_URL}/photos`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
         onUploadProgress: (progressEvent) => {
           if (progressEvent.total) {
