@@ -1,19 +1,17 @@
 import axios from "axios";
-import { useEndpoints } from "../hooks/use-endpoints";
 import { useConfig } from "../contexts/ConfigContext";
 
 export const fetchToken = async (code: string) => {
-  const { AUTH } = useEndpoints();
-  const { clientId, clientSecret } = useConfig();
+  const { auth, callback, clientId, clientSecret } = useConfig();
   try {
     const encodedCredentials = btoa(`${clientId}:${clientSecret}`);
 
     const response = await axios.post(
-      AUTH.TOKEN,
+      `${auth}/oauth2/token`,
       {
         grant_type: "authorization_code",
         code: code,
-        redirect_uri: AUTH.CALLBACK,
+        redirect_uri: callback,
         client_id: clientId,
         client_secret: clientSecret,
       },
