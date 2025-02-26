@@ -1,6 +1,7 @@
-import { Endpoints } from "../../backend/endpoints.ts";
+import { useEndpoints } from "../../hooks/use-endpoints.tsx";
 
 const AuthPage = () => {
+  const { AUTH } = useEndpoints();
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50">
       <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-md">
@@ -10,7 +11,7 @@ const AuthPage = () => {
         <p className="text-gray-600 mb-6">Login to continue</p>
         <a
           className="w-full bg-orange-600 text-white text-center block px-2 py-2 text-lg rounded-sm hover:bg-orange-600/90"
-          href={Endpoints.AUTH.LOGIN}
+          href={AUTH.LOGIN}
         >
           Login with cognito
         </a>

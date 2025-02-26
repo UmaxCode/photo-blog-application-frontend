@@ -1,9 +1,10 @@
 import { api } from "../backend/api";
-import { Endpoints } from "../backend/endpoints";
+import { useEndpoints } from "../hooks/use-endpoints";
 
 export const fetchUsersPost = async () => {
+  const { PHOTOS } = useEndpoints();
   try {
-    const response = await api.get(`${Endpoints.PHOTOS}/own-photo`);
+    const response = await api.get(`${PHOTOS}/own-photo`);
     return response.data;
   } catch (error) {
     console.log(error);
@@ -12,8 +13,9 @@ export const fetchUsersPost = async () => {
 };
 
 export const fetchOthersPost = async () => {
+  const { PHOTOS } = useEndpoints();
   try {
-    const response = await api.get(`${Endpoints.PHOTOS}/others-photo`);
+    const response = await api.get(`${PHOTOS}/others-photo`);
     return response.data;
   } catch (error) {
     console.log(error);
@@ -22,8 +24,9 @@ export const fetchOthersPost = async () => {
 };
 
 export const movePostToRecyclingBin = async (id: string) => {
+  const { PHOTOS } = useEndpoints();
   try {
-    const response = await api.patch(`${Endpoints.PHOTOS}/${id}/recycle-bin`);
+    const response = await api.patch(`${PHOTOS}/${id}/recycle-bin`);
     return response.data;
   } catch (error) {
     console.log(error);
@@ -32,10 +35,9 @@ export const movePostToRecyclingBin = async (id: string) => {
 };
 
 export const sharePost = async (id: string) => {
+  const { PHOTOS } = useEndpoints();
   try {
-    const response = await api.get(
-      `${Endpoints.PHOTOS}/${id}/generate-pre-signed-url`
-    );
+    const response = await api.get(`${PHOTOS}/${id}/generate-pre-signed-url`);
     return response.data;
   } catch (error) {
     console.log(error);
@@ -44,8 +46,9 @@ export const sharePost = async (id: string) => {
 };
 
 export const fetchUserRecycledPost = async () => {
+  const { PHOTOS } = useEndpoints();
   try {
-    const response = await api.get(`${Endpoints.PHOTOS}/recycle-bin`);
+    const response = await api.get(`${PHOTOS}/recycle-bin`);
     return response.data;
   } catch (error) {
     console.log(error);
@@ -54,10 +57,9 @@ export const fetchUserRecycledPost = async () => {
 };
 
 export const restorePostFromRecyclingBin = async (id: string) => {
+  const { PHOTOS } = useEndpoints();
   try {
-    const response = await api.patch(
-      `${Endpoints.PHOTOS}/${id}/recycle-bin/restore`
-    );
+    const response = await api.patch(`${PHOTOS}/${id}/recycle-bin/restore`);
     return response.data;
   } catch (error) {
     console.log(error);
@@ -66,8 +68,9 @@ export const restorePostFromRecyclingBin = async (id: string) => {
 };
 
 export const permanentlyDeletePost = async (id: string) => {
+  const { PHOTOS } = useEndpoints();
   try {
-    const response = await api.delete(`${Endpoints.PHOTOS}/${id}`);
+    const response = await api.delete(`${PHOTOS}/${id}`);
     return response.data;
   } catch (error) {
     console.log(error);
