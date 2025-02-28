@@ -18,6 +18,7 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import { useAuth } from "../contexts/AuthContext";
+import { useConfig } from "../contexts/ConfigContext";
 
 // Menu items.
 const items = [
@@ -41,7 +42,17 @@ const items = [
   },
 ];
 export function AppSidebar() {
-  const { firstName, lastName } = useAuth();
+  const { firstName, lastName, clearAuthData } = useAuth();
+  const { auth, clientId } = useConfig();
+
+  const logout = () => {
+    clearAuthData();
+    const logoutUrl = window.location.origin;
+    window.location.href = `${auth}/logout?client_id=${clientId}&logout_uri=${encodeURIComponent(
+      logoutUrl
+    )}`;
+  };
+
   return (
     <Sidebar>
       <SidebarContent>
@@ -88,7 +99,7 @@ export function AppSidebar() {
                 className="w-[--radix-popper-anchor-width]"
               >
                 <DropdownMenuItem>
-                  <span>Sign out</span>
+                  <span onClick={logout}>Sign out</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
