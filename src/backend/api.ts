@@ -13,6 +13,11 @@ api.interceptors.request.use(
     config.headers["Authorization"] = `Bearer ${sessionStorage.getItem(
       "id_token"
     )}`;
+
+    // Set default Content-Type based on request type
+    if (!config.headers["Content-Type"]) {
+      config.headers["Content-Type"] = "application/json"; // Default to JSON
+    }
     return config;
   },
   (error) => {
