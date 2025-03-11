@@ -15,9 +15,9 @@ api.interceptors.request.use(
     )}`;
 
     // Set default Content-Type based on request type
-    if (!config.headers["Content-Type"]) {
-      config.headers["Content-Type"] = "application/json"; // Default to JSON
-    }
+    // if (!config.headers["Content-Type"]) {
+    //   config.headers["Content-Type"] = "application/json"; // Default to JSON
+    // }
     return config;
   },
   (error) => {
