@@ -242,7 +242,7 @@ const HomePage = () => {
                   >
                     <CardContent className="p-0">
                       <img
-                        src={`data:image/png;base64,${photo.image}`}
+                        src={`${photo.image}`}
                         alt={`Uploaded ${index}`}
                         className="w-full h-60 object-cover"
                       />
